@@ -27,8 +27,10 @@ namespace Curio.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginCommand command)
         {
+
             var token = await _mediator.Send(command);
             return Ok(new { token });
         }
+        
     }
 }
