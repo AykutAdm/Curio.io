@@ -3,6 +3,7 @@ using AspNetCore.Identity.MongoDbCore.Infrastructure;
 using AspNetCore.Identity.MongoDbCore.Models;
 using Curio.Modules.Users.Domain;
 using Curio.Modules.Users.Features.Register;
+using Curio.Modules.Users.UserMapping;
 using Curio.Shared.Infrastructure.Auth;
 using Curio.Shared.Infrastructure.Context;
 using Curio.Shared.Interfaces;
@@ -23,6 +24,7 @@ builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(RegisterCommand).Assembly); // Users
 });
 
+builder.Services.AddAutoMapper(typeof(UserMappingProfile).Assembly);
 
 //JWT
 builder.Services.AddAuthentication(options =>
