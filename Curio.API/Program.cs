@@ -23,6 +23,7 @@ builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(RegisterCommand).Assembly); // Users
 });
 
+
 //JWT
 builder.Services.AddAuthentication(options =>
 {

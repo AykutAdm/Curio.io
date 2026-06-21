@@ -10,18 +10,16 @@ using System.Threading.Tasks;
 
 namespace Curio.Modules.Users.Features.Register
 {
-    public class RegisterHandler : IRequestHandler<RegisterCommand, string>
+    public class RegisterHandler : IRequestHandler<RegisterCommand>
     {
         private readonly UserManager<AppUser> _userManager;
-        private readonly IJwtService _jwtService;
 
-        public RegisterHandler(UserManager<AppUser> userManager, IJwtService jwtService)
+        public RegisterHandler(UserManager<AppUser> userManager)
         {
             _userManager = userManager;
-            _jwtService = jwtService;
         }
 
-        public async Task<string> Handle(RegisterCommand request, CancellationToken cancellationToken)
+        public async Task Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
             var existingUser = await _userManager.FindByEmailAsync(request.Email);
             if (existingUser != null)
@@ -39,9 +37,6 @@ namespace Curio.Modules.Users.Features.Register
             };
 
             var result = await _userManager.CreateAsync(user, request.Password);
-
-            var token = await _jwtService.GenerateToken(user.Id, user.Email!, user.UserName!);
-            return token;
         }
     }
 }
