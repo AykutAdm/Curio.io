@@ -1,0 +1,6 @@
+@Curio.API_HostAddress = http://localhost:5004
+
+GET {{Curio.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
